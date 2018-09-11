@@ -7,7 +7,7 @@
     var menu = $("#menu");
 
     var protestatar = $('#protestatar');
-    var dragnea = $('#dragnea');
+    var badGuy = $('#badGuy');
 
     var imn = $("#imn");
     var laugh = $("#laugh");
@@ -19,20 +19,25 @@
     var doc = $(document);
 
     doc.on('ready', function () {
-        $(protestatar).draggable({
+        protestatar.draggable({
             containment: "parent",
             start: function (event, el) {
                 protestatar.attr('src', protestatarGif);
             },
             stop: function (event, el) {
                 protestatar.attr('src', protestatarStatic);
-            }
+            },
+            tolerance: "touch",
         });
+
+        $( ".draggable" ).each(function(){$(this).bind("dragstart",badGuyCollision);})
+        $( ".draggable" ).each(function(){$(this).bind("dragstop", badGuyCollision);})
+        $( ".draggable" ).each(function(){$(this).bind("drag",     badGuyCollision);})
 
         setGameZoneBoundaries(gameZone, doc);
     });
 
-    $('#agree-btn').on('click', function(){
+    $('#agree-btn').on('click', function () {
         $('#overlay').hide();
     });
 
@@ -42,25 +47,60 @@
         game.fadeIn(4000);
     });
 
-    var randomisePosition = function () {
+    function badGuyCollision(ev, el) {
+        if ($(this).hasClass('obstacle')){
+            ev.preventDefault();
+            return;
+        }
 
+        $(".overlap").remove();
+        var result = protestatar.collision( ".obstacle" );
+
+        if (result.length){
+            var newPosition = randomisePosition();
+            moveBadGuy(newPosition);
+            playPunchSound();
+        }
     }
 
     var isPlaying = false;
-    mute.on('click', function(){
+    mute.on('click', function () {
         var muteClass = 'glyphicon-volume-off';
         var onClass = 'glyphicon-volume-up';
-        
-        if (isPlaying){
+
+        if (isPlaying) {
             imn.get(0).pause();
         } else {
             imn.get(0).play();
         }
+
         isPlaying = !isPlaying;
 
         mute.find('span').toggleClass(muteClass);
         mute.find('span').toggleClass(onClass);
     })
+
+    function playPunchSound() {
+        if (punch.get(0).paused) {
+            punch.get(0).play();
+        } else {
+            punch.get(0).currentTime = 0
+        }
+    }
+
+    function moveBadGuy(position) {
+        badGuy.stop().animate({
+            "left": position.x + "px",
+            "top": position.y + "px"
+        });
+    }
+
+    function randomisePosition() {
+        return {
+            x: Math.floor(Math.random() * (game.width() - 100)),
+            y: Math.floor(Math.random() * (game.height() - 100))
+        };
+    }
 
     function setGameZoneBoundaries() {
         var cssObj = {
@@ -74,5 +114,4 @@
         game.css(cssObj);
         menu.css(cssObj);
     }
-
 })(jQuery);
