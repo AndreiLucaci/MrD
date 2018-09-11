@@ -16,6 +16,8 @@
 
     var playGame = $("#playGame");
 
+    var timer = $('#timer');
+
     var doc = $(document);
 
     doc.on('ready', function () {
@@ -45,6 +47,7 @@
         laugh.get(0).play();
         menu.fadeOut('slow');
         game.fadeIn(4000);
+        startTimer();
     });
 
     function badGuyCollision(ev, el) {
@@ -93,6 +96,21 @@
             "left": position.x + "px",
             "top": position.y + "px"
         });
+    }
+
+    function startTimer(){
+        timer.empty();      
+        var seconds = 10;
+        function tick() {
+            seconds--;
+            timer.html($('<h2>').html("0:" + (seconds < 10 ? "0" : "") + String(seconds)));
+            if( seconds > 0 ) {
+                setTimeout(tick, 1000);
+            } else {
+                alert("Game over");
+            }
+        }
+        tick();
     }
 
     function randomisePosition() {
