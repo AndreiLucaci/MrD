@@ -13,23 +13,31 @@
 <body>
     <div id="overlay">
         <div class="info">
-            <h1>Acesta este un pamflet si trebuie tratat ca atare. Orice asemănare cu persoane sau fapte reale este pur întâmplătoare. :)</h1>
+            <h1>Acesta este un pamflet si trebuie tratat ca atare. Orice asemănare cu persoane sau fapte reale este pur întâmplătoare.
+                :)</h1>
             <button id="agree-btn" class="btn btn-info btn-lg">Am inteles. Continua la joc.</button>
         </div>
     </div>
 
     <div id="gameZone">
-
         <div id="game" style="display: none">
             <img src="./assets/img/protestatar-static-64.png" id="protestatar" />
             <img src="./assets/img/dragnea-smile-64.gif" id="dragnea" />
         </div>
         <div id="menu">
+            <div class="content">
+                <h2>Jocul e simplu: trebuie sa-l prinzi pe un anumit domn D pentru crimele facute impotriva natiunii Romane</h2>
+                <h3>Trace omul cu steagul catre capul domnului D si incearca sa-l aduci cat mai repede sub justitie</h3>
+                <h3>Ai grija totusi, domnul D este cunoscut ca un am abil si ager... daca nu-l prinzi in timp limita va scapa.</h3>
 
+                <button id="playGame" class="btn btn-info btn-lg">Mult success! Joaca!</button>
+            </div>
         </div>
     </div>
 
-    <p id="mute">Pentru cei cu adevarat patrioti<span class="glyphicon glyphicon-volume-off"></span></p>
+    <p id="mute">Pentru cei cu adevarat patrioti
+        <span class="glyphicon glyphicon-volume-off"></span>
+    </p>
 
     <div id="sounds">
         <audio src="./assets/sound/evil-laugh.mp3" id="laugh" type="audio/mp3"></audio>
@@ -45,4 +53,5 @@
         crossorigin="anonymous"></script>
     <script src="./js/game.js"></script>
 </body>
+
 </html>

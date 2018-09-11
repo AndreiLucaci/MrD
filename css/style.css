@@ -53,12 +53,12 @@ body {
     z-index: 99999999999;
 }
 
-.info {
+.info, .content {
     position: relative;
     text-align: center;
     margin: 0 auto;
     top: 25%;
-    width: 50%;
+    width: 75%;
 }
 
 #footer {

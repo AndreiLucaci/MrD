@@ -4,6 +4,8 @@
 
     var gameZone = $('#gameZone');
     var game = $("#game");
+    var menu = $("#menu");
+
     var protestatar = $('#protestatar');
     var dragnea = $('#dragnea');
 
@@ -11,6 +13,8 @@
     var laugh = $("#laugh");
     var punch = $("#punch");
     var mute = $("#mute");
+
+    var playGame = $("#playGame");
 
     var doc = $(document);
 
@@ -25,8 +29,6 @@
             }
         });
 
-
-
         setGameZoneBoundaries(gameZone, doc);
     });
 
@@ -34,9 +36,11 @@
         $('#overlay').hide();
     });
 
-    var playGame = function () {
-
-    }
+    playGame.on('click', function () {
+        laugh.get(0).play();
+        menu.fadeOut('slow');
+        game.fadeIn(4000);
+    });
 
     var randomisePosition = function () {
 
@@ -68,6 +72,7 @@
 
         gameZone.css(cssObj);
         game.css(cssObj);
+        menu.css(cssObj);
     }
 
 })(jQuery);
