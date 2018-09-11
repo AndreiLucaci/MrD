@@ -1,21 +1,37 @@
 (function ($) {
+    var protestatarGif = './assets/img/protestatar-64.gif';
+    var protestatarStatic = './assets/img/protestatar-static-64.png';
+
     var gameZone = $('#gameZone');
+    var game = $("#game");
     var protestatar = $('#protestatar');
     var dragnea = $('#dragnea');
+
+    var imn = $("#imn");
+    var laugh = $("#laugh");
+    var punch = $("#punch");
+    var mute = $("#mute");
+
     var doc = $(document);
 
     doc.on('ready', function () {
-        setGameZoneBoundaries(gameZone, doc);
-
-
-        gameZone.on('mousemove', function (e) {
-            var left = (e.pageX - gameZone.offset().left);
-            var top = (e.pageY - gameZone.offset().top);
-            protestatar.css({
-                left: left,
-                top: top
-            });
+        $(protestatar).draggable({
+            containment: "parent",
+            start: function (event, el) {
+                protestatar.attr('src', protestatarGif);
+            },
+            stop: function (event, el) {
+                protestatar.attr('src', protestatarStatic);
+            }
         });
+
+
+
+        setGameZoneBoundaries(gameZone, doc);
+    });
+
+    $('#agree-btn').on('click', function(){
+        $('#overlay').hide();
     });
 
     var playGame = function () {
@@ -26,13 +42,32 @@
 
     }
 
+    var isPlaying = false;
+    mute.on('click', function(){
+        var muteClass = 'glyphicon-volume-off';
+        var onClass = 'glyphicon-volume-up';
+        
+        if (isPlaying){
+            imn.get(0).pause();
+        } else {
+            imn.get(0).play();
+        }
+        isPlaying = !isPlaying;
+
+        mute.find('span').toggleClass(muteClass);
+        mute.find('span').toggleClass(onClass);
+    })
+
     function setGameZoneBoundaries() {
-        gameZone.css({
+        var cssObj = {
             width: (doc.width() * 8) / 10,
             height: (doc.height() * 8) / 10,
             left: doc.width() / 10,
             'margin-top': doc.height() / 10
-        });
+        };
+
+        gameZone.css(cssObj);
+        game.css(cssObj);
     }
 
 })(jQuery);

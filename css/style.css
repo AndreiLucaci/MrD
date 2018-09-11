@@ -8,12 +8,14 @@
 
 #protestatar {
     position: absolute;
-    margin-top: 10%;
     left: 10%;
+    top: 10%;
+    z-index: 7;
 }
 
-#dragnea-happy {
-    margin: 0 auto;
+#dragnea {
+    position: absolute;
+    z-index: 6;
 }
 
 body {
@@ -22,4 +24,45 @@ body {
     background: -webkit-linear-gradient(left, #cf0821 27%, #cf0821 27%, #fcd20e 28%, #fcd20e 67%, #002780 67%, #002780 67%);
     background: linear-gradient(to right, #cf0821 27%, #cf0821 27%, #fcd20e 28%, #fcd20e 67%, #002780 67%, #002780 67%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf0821', endColorstr='#002780', GradientType=1);
+}
+
+#mute {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+}
+
+#mute span {
+    position: relative;
+    margin-left: 5px;
+    top: 1px;
+}
+
+#mute:hover {
+    cursor: pointer;
+}
+
+#overlay {
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999999999;
+}
+
+.info {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    top: 25%;
+    width: 50%;
+}
+
+#footer {
+    height: 20px;
+    text-align: center;
+    margin: 0 auto;
 }

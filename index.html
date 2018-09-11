@@ -6,24 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Catch Dragnea</title>
 </head>
 
 <body>
+    <div id="overlay">
+        <div class="info">
+            <h1>Acesta este un pamflet si trebuie tratat ca atare. Orice asemănare cu persoane sau fapte reale este pur întâmplătoare. :)</h1>
+            <button id="agree-btn" class="btn btn-info btn-lg">Am inteles. Continua la joc.</button>
+        </div>
+    </div>
+
     <div id="gameZone">
-        <div id="game">
-            <img src="./assets/protestatar-32.gif" id="protestatar" />
-            <img src="./assets/dragnea-smile-64.gif" id="dragnea-happy" />
-            <img src="./assets/dragnea-sad-64.gif" id="dragnea-sad" style="display: none" />
+
+        <div id="game" style="display: none">
+            <img src="./assets/img/protestatar-static-64.png" id="protestatar" />
+            <img src="./assets/img/dragnea-smile-64.gif" id="dragnea" />
         </div>
         <div id="menu">
-            
+
         </div>
+    </div>
+
+    <p id="mute">Pentru cei cu adevarat patrioti<span class="glyphicon glyphicon-volume-off"></span></p>
+
+    <div id="sounds">
+        <audio src="./assets/sound/evil-laugh.mp3" id="laugh" type="audio/mp3"></audio>
+        <audio src="./assets/sound/punch.mp3" id="punch" type="audio/mp3"></audio>
+    </div>
+    <div id="footer">
+        <audio src="./assets/sound/imn.mp3" id="imn" type="audio/mp3" loop></audio>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
     <script src="./js/game.js"></script>
 </body>
-
 </html>
