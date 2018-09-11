@@ -14,13 +14,14 @@
     <div id="overlay">
         <div class="info">
             <h1>Acesta este un pamflet si trebuie tratat ca atare. Orice asemănare cu persoane sau fapte reale este pur întâmplătoare.
-                :)</h1>
-            <button id="agree-btn" class="btn btn-info btn-lg">Am inteles. Continua la joc.</button>
+                :)
+            </h1>
+            <button id="agree-btn" class="btn btn-info btn-lg">Am înțeles. Continuă la joc.</button>
         </div>
     </div>
 
-    <div id="timer" class="info">
-
+    <div class="info">
+        <div id="timer"></div>
     </div>
 
     <div id="gameZone">
@@ -30,16 +31,30 @@
         </div>
         <div id="menu">
             <div class="content">
-                <h2>Jocul e simplu: trebuie sa-l prinzi pe un anumit domn D pentru crimele facute impotriva natiunii Romane</h2>
-                <h3>Trace omul cu steagul catre capul domnului D si incearca sa-l aduci cat mai repede sub justitie</h3>
-                <h3>Ai grija totusi, domnul D este cunoscut ca un am abil si ager... daca nu-l prinzi in timp limita va scapa.</h3>
+                <h2>Jocul e simplu: trebuie să-l prinzi pe un anumit Domn D pentru crimele făcute împotriva națiunii Române</h2>
+                <h3>Trage stegarul către capul Domnului D și încearcă să-l aduci cât mai repede sub justiție</h3>
+                <h3>Ai grijă totuși, Domnul D este cunoscut ca fiind abil și ager... daca nu-l prinzi în timp limită va scăpa.</h3>
 
-                <button id="playGame" class="btn btn-info btn-lg">Mult success! Joaca!</button>
+                <button id="playGame" class="btn btn-info btn-lg">Mult success! Joacă!</button>
+            </div>
+        </div>
+        <div id="game-over" style="display: none">
+            <div class="info">
+                <h2>Jocul s-a sfârșit.</h2>
+                <div id="win">
+                    <h3>Felicitări. România este mândră de tine. Domnul D a fost pus după gratii.</h3>
+                    <img src="./assets/img/win.jpg" />
+                </div>
+                <div id="loose">
+                    <h3>Ai dezamăgit nația. Domnul D este încă în libertate.</h3>
+                    <img src="./assets/img/lose.jpg" />
+                </div>
+                <button id="restart-game" class="btn btn-info btn-lg">Joacă încă o dată</button>
             </div>
         </div>
     </div>
 
-    <p id="mute">Pentru cei cu adevarat patrioti
+    <p id="mute">Pentru cei cu adevărat patrioți
         <span class="glyphicon glyphicon-volume-off"></span>
     </p>
 
@@ -47,6 +62,7 @@
         <audio src="./assets/sound/evil-laugh.mp3" id="laugh" type="audio/mp3"></audio>
         <audio src="./assets/sound/punch.mp3" id="punch" type="audio/mp3"></audio>
     </div>
+
     <div id="footer">
         <audio src="./assets/sound/imn.mp3" id="imn" type="audio/mp3" loop></audio>
     </div>
