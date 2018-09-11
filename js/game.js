@@ -14,6 +14,8 @@
     var laugh = $("#laugh");
     var punch = $("#punch");
     var mute = $("#mute");
+
+    var hardCore = $('#hardcore');
     
     var playGame = $("#playGame");
 
@@ -21,8 +23,18 @@
     var lose = $('#lose');
         
     var timer = $('#timer');
+    var stats = $('#stats');
     
     var doc = $(document);
+
+    var isGameOn = false;
+    var maxSeconds = 60;    
+    var seconds = maxSeconds;
+    var hits = 0, currentHits = 0, maxHits = 450, maxHardCoreHits = 1500;
+
+    var isAnimating = false;
+
+    var isPlaying = false;
     
     doc.on('ready', function () {
         protestatar.draggable({
@@ -48,10 +60,18 @@
     });
     
     playGame.on('click', function () {
+        if (hardCore.is(':checked')){
+            currentHits = maxHardCoreHits
+        } else {
+            currentHits = maxHits;
+        }
+
+        randomisePlayers();
         laugh.get(0).play();
         menu.fadeOut('slow');
         game.fadeIn(4000);
         startTimer();
+        displayStats();
     });
     
     function badGuyCollision(ev, el) {
@@ -63,14 +83,13 @@
         $(".overlap").remove();
         var result = protestatar.collision( ".obstacle" );
         
-        if (result.length){
+        if (result.length && !isAnimating){
             var newPosition = randomisePosition();
-            moveBadGuy(newPosition);
+            move(badGuy, newPosition);
             playPunchSound();
         }
     }
     
-    var isPlaying = false;
     mute.on('click', function () {
         var muteClass = 'glyphicon-volume-off';
         var onClass = 'glyphicon-volume-up';
@@ -86,40 +105,63 @@
         mute.find('span').toggleClass(muteClass);
         mute.find('span').toggleClass(onClass);
     })
+
+    function incrementStats(){
+        hits = hits + 1;
+
+        if (hits >= currentHits){
+            isGameOn = false;
+        }
+
+        $('[data-role="hits"]').empty().html(hits);
+    }
+
+    function displayStats(){
+        stats.empty();
+        hits = 0;
+        var maxDosare = $("<div>").html("Numărul maxim de dosare necesare: " + currentHits);
+        var dosare = $("<p>").html("Dosare: <span data-role='hits'></span>");
+
+        stats.append(maxDosare)
+             .append(dosare);
+    }
     
     function playPunchSound() {
         if (punch.get(0).paused) {
             punch.get(0).play();
         } else {
             punch.get(0).currentTime = 0
+            incrementStats();
         }
     }
     
-    function moveBadGuy(position) {
-        badGuy.stop().animate({
+    function move(player, position) {
+        player.stop().animate({
             "left": position.x + "px",
-            "top": position.y + "px"
+            "top": position.y + "px",
+            start: function(){
+                isAnimating = true;
+            },
+            done: function(){
+                isAnimating = false;
+            }
         });
     }
 
-    var startTime, endTime;
-    function start() {
-        startTime = new Date();
-    };
+    function randomisePlayers(){
+        var badGuyRandomPosition = randomisePosition();
+        move(badGuy, badGuyRandomPosition);
+
+        var playerRandomPositions = randomisePosition();
+        move(protestatar, playerRandomPositions);
+    }
 
     function end() {
-        endTime = new Date();
-        var timeDiff = endTime - startTime;
-        timeDiff /= 1000;
-
-        var seconds = Math.round(timeDiff);
-        return seconds;
+        return maxSeconds - seconds;
     }
     
-    var isGameOn = false;
     function startTimer(){
         timer.empty();      
-        var seconds = 10;
         isGameOn = true;
         function tick() {
             seconds--;
@@ -139,17 +181,24 @@
 
     function endGame(outcome) {
         isGameOn = false;
+        var seconds = end();
 
         game.fadeOut("slow");
         gameOver.fadeIn();
+
+        if (hits >= currentHits){
+            outcome = true;
+        }
 
         if (outcome){
             win.show();
             lose.hide();
         } else {
-            lose.show();
             win.hide();
+            lose.show();
         }
+
+        $("[data-role='seconds']").html(seconds);
     }
 
     $('#restart-game').on('click', function(){
@@ -157,6 +206,7 @@
         gameOver.fadeOut();
         win.hide();
         lose.hide();
+        seconds = maxSeconds;
     });
 
     function randomisePosition() {
