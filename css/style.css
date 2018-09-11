@@ -1,0 +1,25 @@
+#gameZone {
+    position: relative;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);
+    background-color: whitesmoke;
+}
+
+#protestatar {
+    position: absolute;
+    margin-top: 10%;
+    left: 10%;
+}
+
+#dragnea-happy {
+    margin: 0 auto;
+}
+
+body {
+    background: #cf0821;
+    background: -moz-linear-gradient(left, #cf0821 27%, #cf0821 27%, #fcd20e 28%, #fcd20e 67%, #002780 67%, #002780 67%);
+    background: -webkit-linear-gradient(left, #cf0821 27%, #cf0821 27%, #fcd20e 28%, #fcd20e 67%, #002780 67%, #002780 67%);
+    background: linear-gradient(to right, #cf0821 27%, #cf0821 27%, #fcd20e 28%, #fcd20e 67%, #002780 67%, #002780 67%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf0821', endColorstr='#002780', GradientType=1);
+}
